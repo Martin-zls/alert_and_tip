@@ -1,7 +1,7 @@
 (function($){
   //css的路径
   var alertcss = {
-    url: 'alert.css',
+    url: '/crm/page/js/nt-mod/mod-alert/alert.css',
     name: 'alert.css'
   };
 
@@ -110,14 +110,14 @@
 
       prmalertbox = $('#prmAlert' + t);
       if (prmalertbox) {
-        prmalertbox.show();
+        prmalertbox.slideDown();
 
         if (json.zhezhao) {
           if(!zhezhao.length){
             zhezhao = addZhezhao();
           }
           zhezhao.show();
-          zhezhao.attr('z-index',alertzIndex);
+          zhezhao.css('z-index',alertzIndex);
         }
         return;
       }
@@ -128,7 +128,12 @@
     html += '<h4>' + json.title + '</h4>';
     html += '<span class="close">×</span>';
     html += '</div>';
-    html += '<div class="box">';
+    if(!(json.confirm || json.cancel)){
+      html += '<div class="box noFd">';
+    }else{
+      html += '<div class="box">';
+    }
+
     html += '<div class="bd">';
     html += json.htmlstr;
     html += '</div>';
@@ -148,7 +153,7 @@
     html += '</div>';
 
     //把弹出框添加到document中
-    var alertbox = $('<div id="prmAlert'+t+'" class="nt-crm-Alert"></div>');
+    var alertbox = $('<div id="prmAlert'+t+'" class="nt-crm-Alert" style="display: none;"></div>');
 
     //如果有id，说明是常驻的，加上相关属性
     if (json.id === 0) {
@@ -172,7 +177,7 @@
     }
 
     //把弹出层显示出来
-    $('#prmAlert' + t).show().attr('z-index',alertzIndex + addzindex);
+    $('#prmAlert' + t).slideDown().css('z-index',alertzIndex + addzindex);
 
 
     //如果要遮罩层，就把遮罩显示出来
@@ -181,7 +186,7 @@
         zhezhao = addZhezhao();
       }
       zhezhao.show();
-      zhezhao.attr('z-index',alertzIndex);
+      zhezhao.css('z-index',alertzIndex);
     }
 
 
@@ -212,15 +217,16 @@
       var prmalertarr = $(".nt-crm-Alert");
       var stayNo = [];
       var topzindex =0;
-      for (var i = 0, len = prmalertarr.length; i < len; i++) {
-
-        if (prmalertarr[i].style.display == "block") {
-          if(prmalertarr[i].style.zIndex > topzindex){
-            topzindex = prmalertarr[i].style.zIndex;
+      prmalertarr.each(function(){
+        var display = $(this).css('display');
+        if(display==undefined || display=='block'){
+          var zindex = $(this).css('z-index');
+          if(zindex>topzindex){
+            topzindex = zindex;
           }
-          stayNo.push(prmalertarr[i]);
-        }
-      }
+          stayNo.push($(this));
+        };
+      });
 
       if (stayNo.length < 1) {
         if (json.zhezhao) {
@@ -236,7 +242,7 @@
             zhezhao = addZhezhao();
           }
           alertzIndex = topzindex -1;
-          zhezhao.attr('z-index',alertzIndex);
+          zhezhao.css('z-index',alertzIndex);
         }
       }
 

@@ -22,7 +22,7 @@
 
 .nt-crm-Alert {
     min-width: 400px;
-    min-height: 120px;
+    /*min-height: 120px;*/
     max-width: 1200px;
     background-color: #f3f5f7
 }
@@ -38,6 +38,10 @@
 
 .nt-crm-Alert .box {
     padding-bottom: 50px;
+    overflow: hidden;
+}
+.nt-crm-Alert .box.noFd {
+    padding-bottom: 20px;
 }
 
 .nt-crm-Alert .hd, #nt-crm-Tip .hd {
@@ -47,7 +51,9 @@
     text-align: center;
     color: #fff;
     font-size: 18px;
-    background: #337ab7
+    background: #337ab7;
+    position: relative;
+    z-index: 2;
 }
 
 .nt-crm-Alert .hd .close {
@@ -57,12 +63,16 @@
     width: 34px;
     height: 34px;
     text-align: center;
-    line-height: 30px;
-    font-size: 25px;
+    line-height: 34px;
+    font-size: 28px;
     color: #b8beca;
     cursor: pointer;
     opacity: 1;
     font-weight: 100;
+}
+.nt-crm-Alert .hd .close:hover {
+    color: #ff2f54;
+    text-shadow: -1px 0px 0 #000;
 }
 
 .nt-crm-Alert .hd h4, #nt-crm-Tip .hd h4 {
@@ -72,16 +82,25 @@
 }
 
 .nt-crm-Alert .bd, #nt-crm-Tip .bd {
-    margin: 15px 20px;
+    margin: 0 20px;
+    padding: 15px 0;
     max-height: 700px;
 }
 
 .nt-crm-Alert .bd {
     overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 2;
+    background: #f3f5f7;
+}
+.nt-crm-Alert .bd::-webkit-scrollbar {
+    width:1px;
 }
 
 .nt-crm-Alert .bd {
     margin-bottom: 0;
+    padding-bottom: 0;
     min-height: 60px
 }
 
@@ -125,7 +144,7 @@
     right: 0;
     height: 38px;
     text-align: right;
-    padding: 0 10px
+    padding: 0 20px
 }
 
 .nt-crm-Alert .fd a {

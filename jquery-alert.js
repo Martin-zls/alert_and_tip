@@ -116,8 +116,10 @@
           if(!zhezhao.length){
             zhezhao = addZhezhao();
           }
-          zhezhao.show();
-          zhezhao.css('z-index',alertzIndex);
+          zhezhao.css({
+            'z-index': alertzIndex,
+            'display': 'block'
+          });
         }
         return;
       }
@@ -185,8 +187,10 @@
       if(!zhezhao.length){
         zhezhao = addZhezhao();
       }
-      zhezhao.show();
-      zhezhao.css('z-index',alertzIndex);
+      zhezhao.css({
+        'z-index': alertzIndex,
+        'display': 'block'
+      });
     }
 
 
@@ -233,7 +237,7 @@
           if(!zhezhao.length){
             zhezhao = addZhezhao();
           }
-          zhezhao.hide();
+          zhezhao.css('display','none');
         }
       }
       else {
